@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{user.first_name}} {{user.last_name}}</title>
+</head>
+<body>
+    <h1>{{user.first_name}} {{user.last_name}}</h1>
+    <ul>
+        <li>ID: {{user.id}}</li>
+        <li><img width="100" height="100" src="{{user.image_url}}"></li>
+    </ul>
+    <a href="/users/{{user.id}}/edit.html">Edit</a>
+    <a href="/users/{{user.id}}/delete.html">Delete</a><br>
+    <a href="/">Go Back</a>
+</body>
+</html>
+

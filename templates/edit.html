@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit User</title>
+</head>
+<body>
+    <h2>Edit a User</h2>
+    <form action="/users/{{user.id}}/edit.html" method="POST">
+        <input type="text" name="firstname" value="{{user.first_name}}"><br>
+        <input type="text" name="lastname" value="{{user.last_name}}"><br>
+        <input type="text" name="image" value="{{user.image_url}}"><br>
+        <button>Edit</button><br>
+        <a href="/users/{{user.id}}">Cancel</a>
+    </form>    
+</body>
+</html>
