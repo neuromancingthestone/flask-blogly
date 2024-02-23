@@ -1,7 +1,8 @@
 """Blogly application."""
 from flask import Flask, request, render_template, redirect, flash, session
 from flask_debugtoolbar import DebugToolbarExtension
-from models import db, connect_db, User
+from models import db, connect_db, User, Post
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -47,7 +48,66 @@ def list_users():
 def show_user(user_id):
     """Show details about a single pet"""
     user = User.query.get_or_404(user_id)
-    return render_template('detail.html', user=user)
+    posts = Post.query.filter(Post.user_id == user_id)
+    return render_template('detail.html', user=user, posts=posts)
+
+@app.route('/users/<int:user_id>/posts/new')
+def new_post(user_id):
+    """Show details about a single pet"""
+    user = User.query.get_or_404(user_id)
+    posts = Post.query.filter(Post.user_id == user_id)
+    return render_template('addpost.html', user=user, posts=posts)
+
+@app.route('/users/<int:user_id>/posts/new', methods=["POST"])
+def add_post(user_id):
+    title = request.form["title"]
+    content = request.form["content"]
+    now = datetime.now()
+
+    new_post = Post(title=title, 
+                    content=content, 
+                    created_at=now, 
+                    user_id=user_id)
+
+    db.session.add(new_post)
+    db.session.commit()
+
+    return redirect(f"/users/{user_id}")
+
+@app.route('/posts/<int:post_id>')
+def show_post(post_id):
+    """Shows user page"""
+    post = Post.query.get_or_404(post_id)    
+    user = User.query.get_or_404(post.user_id)
+    return render_template('post.html', user=user, post=post)
+
+@app.route('/posts/<int:post_id>/edit')
+def edit_post(post_id):
+    """Shows user page"""
+    post = Post.query.get_or_404(post_id)    
+    user = User.query.get_or_404(post.user_id)
+    return render_template('editpost.html', user=user, post=post)
+
+@app.route('/posts/<int:post_id>/edit', methods=["POST"])
+def update_post(post_id):
+    orig = Post.query.get_or_404(post_id)    
+
+    orig.title = request.form["title"]
+    orig.content = request.form["content"]
+
+    db.session.add(orig)
+    db.session.commit()
+
+    return redirect(f"/posts/{post_id}")
+
+@app.route('/posts/<int:post_id>/delete')
+def delete_post(post_id):
+    post = Post.query.get_or_404(post_id)    
+
+    db.session.delete(post)
+    db.session.commit()
+
+    return redirect(f"/users/{post.user_id}")
 
 @app.route('/users/<int:user_id>/edit.html')
 def edit_page(user_id):

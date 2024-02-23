@@ -1,0 +1,123 @@
+* {
+  box-sizing: border-box;
+}
+
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: white;
+  color: black;
+  padding: 8px 16px;
+  border: 2px solid lightseagreen;  
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit]:hover, input[type=submit]:active {
+  background-color: lightseagreen;
+  color: white;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.column {
+  float: left;
+  padding: 5px;
+}
+
+.editbtn:link, .editbtn:visited {
+  background-color: white;
+  color: black;  
+  border: 2px solid lightseagreen;
+  padding: 6px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.editbtn:hover, .editbtn:active {
+  background-color: lightseagreen;
+  color: white;  
+}
+
+.deletebtn:link, .deletebtn:visited {
+  background-color: white;
+  border: 2px solid lightcoral;  
+  color: black;
+  padding: 6px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.deletebtn:hover, .deletebtn:active {
+  background-color: lightcoral;
+  color: white;
+}
+
+.newpostbtn:link, .newpostbtn:visited {
+  background-color: white;
+  border: 2px solid navy;  
+  color: black;
+  padding: 6px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.newpostbtn:hover, .newpostbtn:active {
+  background-color: navy;
+  color: white;
+}
+
+.cancelbtn:link, .cancelbtn:visited {
+  background-color: white;
+  border: 2px solid navy;  
+  color: black;
+  padding: 6px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cancelbtn:hover, .cancelbtn:active {
+  background-color: navy;
+  color: white;
+}

@@ -30,3 +30,22 @@ class User(db.Model):
     
     def greet(self):
         return f"Hi, I am {self.first_name} {self.last_name}!"
+    
+class Post(db.Model):
+    """For posts"""
+
+    __tablename__ = "posts"
+
+    id = db.Column(db.Integer,
+                   primary_key=True,
+                   autoincrement=True)
+    title = db.Column(db.String(50),
+                      nullable=False)
+    content = db.Column(db.String,
+                        nullable=False)
+    created_at = db.Column(db.DateTime,
+                           nullable=False)
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey('users.id'),
+        nullable=False)
