@@ -24,6 +24,12 @@
                 <div class="col-75">
                     <textarea rows="10" cols="30" id="content" name="content"></textarea>
                 </div>
+                <div>
+                {% for t in tags %}
+                        <input type="checkbox" name="tags" value="{{t.id}}">
+                        <label for="tags">{{t.name}}</label>
+                {% endfor %}
+                </div>
                 <div class="row">
                     <a href="/users/{{user.id}}" class="cancelbtn">Cancel</a>
                     <input type="submit" value="Add">

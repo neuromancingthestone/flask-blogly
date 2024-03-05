@@ -1,4 +1,4 @@
-from models import User, db, Post
+from models import User, db, Post, Tag, PostTag
 from app import app
 from datetime import datetime
 
@@ -63,4 +63,31 @@ p7 = Post(title='Will power',
 db.session.add_all([p1, p2, p3, p4, p5, p6, p7])
 
 # Commit -- otherwise, this never gets saved!
+db.session.commit()
+
+# Add a couple of tags
+
+t1 = Tag(name='Fun')
+
+t2 = Tag(name='Boop')
+
+t3 = Tag(name='Lame')
+
+t4 = Tag(name='Nope')
+
+db.session.add_all([t1, t2, t3, t4])
+
+db.session.commit()
+
+# Add tags to posts
+
+pt1 = PostTag(post_id=1,tag_id=1)
+pt2 = PostTag(post_id=1,tag_id=2)
+pt3 = PostTag(post_id=2,tag_id=2)
+pt4 = PostTag(post_id=3,tag_id=1)
+pt5 = PostTag(post_id=4,tag_id=1)
+pt6 = PostTag(post_id=4,tag_id=2)
+
+db.session.add_all([pt1, pt2, pt3, pt4, pt5, pt6])
+
 db.session.commit()

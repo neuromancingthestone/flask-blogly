@@ -1,5 +1,6 @@
 """Models for Blogly."""
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.schema import PrimaryKeyConstraint
 
 db = SQLAlchemy()
 
@@ -25,6 +26,8 @@ class User(db.Model):
                           nullable=True)
     image_url = db.Column(db.String, 
                           nullable=True)
+    
+    post = db.relationship('Post', cascade='all, delete-orphan')
 
 # MODELS GO BELOW!
     
@@ -49,3 +52,52 @@ class Post(db.Model):
         db.Integer,
         db.ForeignKey('users.id'),
         nullable=False)
+    
+    user = db.relationship('User')
+    
+    assignments = db.relationship('PostTag', backref="tag", cascade='all, delete-orphan')   
+    
+class Tag(db.Model):
+    """For Tags"""
+
+    __tablename__ = "tags"
+
+    id = db.Column(db.Integer,
+                   primary_key=True,
+                   autoincrement=True)
+    name = db.Column(db.String(50),
+                     nullable=False)
+    
+    assignments = db.relationship('PostTag', backref="post")    
+    posts = db.relationship('Post', secondary="posttags", backref="tags",)
+    
+class PostTag(db.Model):
+    """Join together Post and Tag"""
+    
+    __tablename__ = "posttags"
+
+    @classmethod
+    def get_is_tagged(cls, post_id, tag_id):
+        if(cls.query.filter_by(post_id=post_id, tag_id=tag_id).all()):
+           return True
+        else:
+            return False
+
+    post_id = db.Column(db.Integer,
+                        db.ForeignKey("posts.id"),
+                        primary_key=True, 
+                        nullable=False)
+    tag_id = db.Column(db.Integer,
+                       db.ForeignKey("tags.id"),
+                       primary_key=True,
+                       nullable=False)
+    
+    postref = db.relationship('Post')
+    tagref = db.relationship('Tag') 
+    
+    __table_args__ = (
+        PrimaryKeyConstraint('post_id', 'tag_id'),
+    )
+
+    
+    

@@ -18,13 +18,25 @@
                     <input type="text" id="title" name="title" placeholder="{{post.title}}">
                 </div>
             </div>    
-            <div class="row"></div>            
+            <div class="row">         
                 <div class="col-25">
                     <label for="content">Content</label>
                 </div>
                 <div class="col-75">
                     <textarea rows="10" cols="30" id="content" name="content" placeholder="{{post.content}}"></textarea>
                 </div>
+            </div>   
+            <div class = "row">
+                <div class="col-25">
+                </div>
+                <div class="col-75">
+                    <b>Tags:</b>
+                    {% for t in tags %}          
+                        <input type="checkbox" id="tags" name="tags" value="{{t.id}}" {% if t in post.tags %} checked {% endif %}>
+                        <label for="tags">{{t.name}}</label>                                                                                                                      
+                    {% endfor %}
+                </div>
+            </div>
             <div class="row">
                 <a href="/posts/{{post.id}}" class="cancelbtn">Cancel</a>
                 <input type="submit" value="Edit">

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles.css">
+    <title>Show all Tags</title>
+</head>
+<body>
+    <div class="row">
+        <div class="column">
+            <h1>Tags</h1>  
+            <ul>
+                {% for t in tags %}
+                <li><a href="/tags/{{t.id}}">{{t.name}}</a></li>
+                {% endfor %}
+            </ul>
+            <a href="/tags/addtag.html" class="newpostbtn">Add Tag</a>
+        </div>
+    </div>            
+    <a href="/">Go Back</a>    
+</body>
+</html>    
